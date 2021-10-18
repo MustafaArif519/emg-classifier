@@ -2,8 +2,8 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 
-def write_to_csv(dest_path, dataframe, which_class):
-    pass
+def write_to_csv(dest_path, dataframe):
+    dataframe.to_csv(dest_path)
 
 def collect(file_path, which_class, dest_path):
     data = pd.read_csv(file_path, sep='\t', header=0)
@@ -21,20 +21,19 @@ def collect(file_path, which_class, dest_path):
             dest = dest_path / which_class / f'training_{start_file}.txt'
     return data
 
-
 def main():
     dir = Path('.')
     dest = dir / 'EMG_data_ordered_by_class'
     all_dirs = [x for x in dir.iterdir() if x.is_dir()]
     all_test_file_paths = []
+    # rearrange test inputs, separate by class
     for each in all_dirs:
         all_txt_files = (list)(each.glob('*.txt'))
         all_test_file_paths.append(all_txt_files)
     for i in range(0, 6):
-        dataframe = pd.
-
-
-
+        dest_path = dest / str(i)
+        for file in all_test_file_paths:
+            collect(file, i, dest_path)
 
 
 if __name__ == "__main__":
