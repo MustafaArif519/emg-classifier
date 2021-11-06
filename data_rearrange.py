@@ -1,9 +1,10 @@
 from pathlib import Path
 import pandas as pd
 import numpy as np
+import data_preprocess
+
 
 def write_to_csv(dest_path, dataframe):
-    # n = len([f for f in dest_path.glob('*')])
     dataframe.to_csv(dest_path, index=False)
 
 def collect(file_path, which_class, dest_path, num):
@@ -14,7 +15,7 @@ def collect(file_path, which_class, dest_path, num):
     # when class changes
     for index, row in data.iterrows():
         if row['class'] == np.float64(which_class):
-            data_comb = data_comb.append(row.to_dict(), ignore_index=True)
+            data_comb = data_comb.append(row, ignore_index=True)
         elif len(data_comb) != 0: # write to file whenever there's change in class
             # print(num)
             dest = dest_path / f'training_{num}.txt'
@@ -42,11 +43,12 @@ def main():
         all_txt_files = (list)(each.glob('*.txt'))
         all_training_files.extend(all_txt_files)
     # print(all_training_files)
-    for i in range(1, 6):
+    for i in range(1,2):
         dest_path = dest / str(i)
         num = 1
         for file in all_training_files:
             num = collect(file, i, dest_path, num)
+
 
 
 if __name__ == "__main__":
