@@ -7,9 +7,10 @@
 2. Running this is a bit slow. Any better ideas?
 ![image](https://user-images.githubusercontent.com/59846636/140615271-f7a2213a-fe3e-40a2-9b44-87474c273e57.png)
 Example of 1 file
+3. Only run once
 # Data preprocessing
-1. Change them into same dimensions (same number of time points)
-2. Compute true_class vector for the model to compare
+1. Change them into same dimensions (same number of time points) e.g. 1200 x 8 / 2000 x 8
+2. Only run once
 # Model.py
 1. Define convolution, pooling, linear layers in the __init__
 2. Assign starting weights
