@@ -9,8 +9,9 @@ void setup() {
 void loop() {
 
   // read the input on analog pin 0:
-  
   int sensorValue = analogRead(A0);
+
+  float mtime = millis();
   float voltage = sensorValue * (5.0 / 1023.0);
   Serial.println(voltage);  
 }
