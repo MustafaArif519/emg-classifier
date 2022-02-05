@@ -7,3 +7,4 @@ imageio
 scikit-learn
 Pillow
 scipy
+sklearn
