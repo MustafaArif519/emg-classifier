@@ -1,3 +1,4 @@
 __pycache__
 .ipynb_checkpoints
-EMG_data_for_gestures-master
+env/
+EMG_data_for_gestures-master/
