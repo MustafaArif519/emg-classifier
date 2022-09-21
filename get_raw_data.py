@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import pickle
 
 # Combine data from EMG_data_for_gestures-master into one dataframe
 def get_ring_dataset():
@@ -23,3 +24,6 @@ def get_ring_dataset():
     df_list = [pd.read_table(file) for file in fileList]
     raw_df = pd.concat(df_list)
     return raw_df
+
+combined_data = get_ring_dataset()
+combined_data.to_pickle("combined_data.pkl")
