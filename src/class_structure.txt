@@ -1,0 +1,18 @@
+Class WindowPredictor
+
+raw data
+window size
+model (including parameters)
+
+private static window data(label windows strategy())
+public train()
+public predict()
+
+
+
+
+
+Scratch Space
+
+---+++++--
+00011110000
