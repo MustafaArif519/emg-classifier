@@ -10,4 +10,4 @@ class WindowPredictor:
         self.trained = True
 
     def label_window(self, window):
-        pass
+        raise Exception("Implement label_window")
