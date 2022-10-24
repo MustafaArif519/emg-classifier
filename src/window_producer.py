@@ -32,10 +32,11 @@ def window_by_labels(X, y, min_window_size=50, padding=10):
     x_windows = []
     y_labels = []
     X_len = len(X)
-    for idx in range(X_len):
+    idx = 0
+    while idx < X_len:
         if y[idx] == 1:
             true_start = max(idx - padding, 0)
-            while y[idx] == 1:
+            while idx < X_len and y[idx] == 1:
                 idx += 1
             true_end = min(idx + padding, X_len-1) 
             if true_end - true_start >= min_window_size:
@@ -43,7 +44,7 @@ def window_by_labels(X, y, min_window_size=50, padding=10):
                 y_labels.append(1)
         else:
             false_start = max(idx - padding, 0)
-            while y[idx] == 0:
+            while idx < X_len and y[idx] == 0:
                 idx += 1
             false_end = min(idx + padding, X_len-1) 
             if false_end - false_start >= min_window_size:
@@ -60,9 +61,9 @@ def raw_to_labeled_windows(raw_df):
         X: list of 1D numpy arrays (windows)
         y: list of labels for each window in X
     """
-    x_np = raw_df['x']
-    y_np = raw_df['y']
-    x_windows, y_labels = window_by_labels(x_np, y_np)
+    x_list = list(raw_df['x'])
+    y_list = list(raw_df['y'])
+    x_windows, y_labels = window_by_labels(x_list, y_list)
     return x_windows, y_labels
 
 

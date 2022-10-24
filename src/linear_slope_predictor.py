@@ -31,8 +31,16 @@ class LinearSlopePredictor(WindowPredictor):
                 min_falling_idx = np.argmin(window_arr[max_idx:len(window_arr)])
             min_falling_val = window_arr[min_falling_idx]
 
-            rising_slope = (max_val - min_rising_val) / (max_idx - min_rising_idx)
-            falling_slope = (min_falling_val - max_val) / (min_falling_idx - max_idx)
+            rising_x_diff = max_idx - min_rising_idx
+            if rising_x_diff == 0:
+                rising_slope = 0
+            else:
+                rising_slope = (max_val - min_rising_val) / rising_x_diff
+            falling_x_diff = min_falling_idx - max_idx
+            if falling_x_diff == 0:
+                falling_slope = 0
+            else:
+                falling_slope = (min_falling_val - max_val) / falling_x_diff
 
             if labels[idx] == 1:
                 rising_slopes_true[idx] = rising_slope
@@ -56,7 +64,7 @@ class LinearSlopePredictor(WindowPredictor):
 
 
 if __name__ == "__main__":
-    raw_data = pd.read_pickle("combined_data.pkl")
+    raw_data = pd.read_pickle("../combined_data.pkl")
     raw_data = raw_data[raw_data['class'] != 0]
     raw_data.loc[raw_data['class'] != 2] = 0
     raw_data.loc[raw_data['class'] == 2] = 1

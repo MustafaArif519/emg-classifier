@@ -7,7 +7,7 @@ class WindowPredictor:
         self.trained = False
     
     def train(self, windows, labels):
-        self.trained = True
+        raise Exception("Implement train")
 
     def label_window(self, window):
         raise Exception("Implement label_window")
