@@ -1,5 +1,8 @@
 import numpy as np
 
+# what happens when window size changes?
+# add variable to handle it?
+
 
 class WindowPredictor:
 
