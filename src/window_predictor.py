@@ -6,7 +6,7 @@ import numpy as np
 
 class WindowPredictor:
 
-    def WindowPredictor(self):
+    def __init__(self):
         self.trained = False
     
     def train(self, windows, labels):

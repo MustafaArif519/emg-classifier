@@ -82,11 +82,33 @@ if __name__ == "__main__":
         "class": "y",
         "channel1": "x"
     })
-    raw_data = raw_data.head(50000)
-    x_windows, y_labels = raw_to_labeled_windows(raw_data)
+    train_data = raw_data.head(50000)
+    x_windows, y_labels = raw_to_labeled_windows(train_data)
     linear_predictor = LinearSlopePredictor()
     linear_predictor.train(x_windows, y_labels)
     print(linear_predictor.rising_slope_min, linear_predictor.falling_slope_max)
 
+    test_data = raw_data.tail(50000)
+    x_labels, y_labels = raw_to_labeled_windows(test_data)
+    tp = fp = tn = fn = 0
+    for i in range(len(x_labels)):
+        pred = linear_predictor.label_window(x_labels[i])
+        actual = y_labels[i]
+
+        if pred and actual:
+            tp += 1
+        elif pred and not actual:
+            fp += 1
+        elif not pred and not actual:
+            tn += 1
+        elif not pred and actual:
+            fn += 1
+        else:
+            print("Not right")
+            exit(1)
+    print(f"true positive: {tp}")
+    print(f"false positive: {fp}")
+    print(f"true negative: {tn}")
+    print(f"false negative: {fn}")
 
 
